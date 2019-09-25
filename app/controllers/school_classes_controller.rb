@@ -8,10 +8,14 @@ class SchoolClassesController < ApplicationController
   end 
   def create 
     @school_class = SchoolClass.new(school_class_params)
-    # @schoolclass.title = schoolclass_params
-    # @schoolclass.room_number = params[:room_number]
-    @school_class.save 
-    redirect_to school_class_path(@school_class)
+    if @school_class.valid? 
+      @school_class.save
+      redirect_to school_class_path(@school_class)
+    else 
+      redirect_to school_classes_path
+    end 
+
+    
   end 
 
   def show
